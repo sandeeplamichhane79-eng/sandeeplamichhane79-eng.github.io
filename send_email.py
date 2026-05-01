@@ -17,6 +17,9 @@ EMAIL_PASSWORD = "your-app-password"  # You'll need to set up an app password
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
+# For testing purposes, we'll simulate email sending
+SIMULATE_EMAIL = True  # Set to False when you have real email credentials
+
 # WhatsApp configuration
 WHATSAPP_PHONE = "+9779816528022"  # Your WhatsApp number
 WHATSAPP_API_KEY = "your-whatsapp-api-key"  # You'll need to set up WhatsApp API
@@ -65,6 +68,12 @@ def send_whatsapp_message(name, email, message):
 
 def send_email(name, email, message):
     try:
+        if SIMULATE_EMAIL:
+            # Simulate email sending for testing
+            print(f"SIMULATED EMAIL - From: {name} ({email})")
+            print(f"Message: {message}")
+            return True, "Message sent successfully! (Simulation mode)"
+        
         # Create message
         msg = MIMEMultipart()
         msg['From'] = EMAIL_ADDRESS
